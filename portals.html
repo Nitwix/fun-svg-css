@@ -7,12 +7,29 @@
             background: black;
         }
 
-        #portals{
+        #portals-svg{
             
         }
 
         .portal {
             filter: url(#shadow);
+
+            animation-name: glow;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes glow {
+            from{
+                rx: 112px;
+                ry: 200px;
+            }
+            to{
+                rx: 120px;
+                ry: 220px;
+            }
         }
 
         #orange {
@@ -26,7 +43,7 @@
 </head>
 
 <body>
-    <svg height="1000" width="800" id="portals">
+    <svg height="1000" width="800" id="portals-svg">
         <defs>
             <radialGradient id="orangeGrad" class="gradient">
                 <stop offset="85%" stop-color="white"/>
