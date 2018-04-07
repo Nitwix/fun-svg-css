@@ -81,20 +81,75 @@
     <div id="drawing"></div>
 </body>
 
-<script src='node_modules/svg.js/dist/svg.min.js'></script>
+<script src="node_modules/svg.js/dist/svg.min.js"></script>
+<script src="node_modules/svg.filter.js/dist/svg.filter.js"></script>
 
 <script>
 
     let draw = SVG('drawing').size(1000, 800);
-    
-    class Portal{
-        constructor(){
-            this.ellipse = draw.ellipse().radius(112, 200).fill('orange').move(112, 200);
-            
-        }
-    }
 
-    let orangePortal = new Portal();
+    SVG.Portal = SVG.invent({
+            // Define the type of element that should be created
+            create: 'ellipse',
+
+            // Specify from which existing class this shape inherits
+            inherit: SVG.Ellipse,
+
+            // Add custom methods to invented shape
+            extend: {
+                border_glow(){
+                    return this.filter(function (add) {
+                        let blur = add.gaussianBlur(20);
+
+                        add.blend(add.source, blur);
+
+                        this.size('200%', '200%').move('-50%', '-50%');
+                    });
+                },
+                size_anim(rx, ry, scale){
+                    return this.animate(2000, '<>', ).attr({
+                        rx: rx*scale,
+                        ry: ry*scale
+                    });
+                },
+            },
+
+            // Add method to parent elements
+            construct: {
+                portal(x,y,rx,ry,color){
+                    let grad = this.gradient('radial', function (stop) {
+                        stop.at(.8, '#fff');
+                        stop.at(1, color);
+                    });
+
+                    let portal = new SVG.Portal;
+                    portal.radius(rx, ry);
+                    portal.fill(grad);
+                    portal.move(x,y);
+                    portal.animActive = false;
+                    portal.size_anim(rx, ry, 1.05).loop(undefined, true);
+                    // portal.mouseover(() => {
+                    //     let p = portal;
+                    //     if(p.animActive){
+                    //         p.size_anim(rx, ry, 1.05).pause();
+                    //         p.animActive = false;
+                    //     }else{
+                    //         p.size_anim(rx, ry, 1.05).play();
+                    //         p.animActive = true;
+                    //     }
+                        
+                    // });
+
+                    return this.put(portal);
+                }
+            }
+        })
+
+    let orangePortal = draw.portal(50, 200, 112, 200, 'orange').border_glow();
+    let bluePortal = draw.portal(400, 200, 112, 200, '#00BFFF').border_glow();
+    // let greenPortal = draw.portal(300, 400, 112, 200, '#6fff00').border_glow();
+
+
 </script>
 
 </html>
