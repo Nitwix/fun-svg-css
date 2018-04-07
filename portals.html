@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background: black;
+        }
+
+        #portals{
+            
+        }
+
+        .portal {
+            filter: url(#shadow);
+        }
+
+        #orange {
+            fill: url(#orangeGrad);
+        }
+
+        #blue {
+            fill: url(#blueGrad);
+        }
+    </style>
+</head>
+
+<body>
+    <svg height="1000" width="800" id="portals">
+        <defs>
+            <radialGradient id="orangeGrad" class="gradient">
+                <stop offset="85%" stop-color="white"/>
+                <stop offset="100%" stop-color="orange" />
+            </radialGradient>
+            <radialGradient id="blueGrad">
+                <stop offset="85%" stop-color="white" />
+                <stop offset="100%" stop-color="#00BFFF" />
+            </radialGradient>
+
+            <filter id="shadow" x="-10%" y="-10%" width="120%" height="200%" y="-40%">
+                <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
+                <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+            </filter>
+        </defs>
+
+        <ellipse cx="200" cy="250" rx="112" ry="200" id="orange" class="portal" />
+        <ellipse cx="500" cy="250" rx="112" ry="200" id="blue" class="portal" />
+    </svg>
+</body>
+
+</html>
