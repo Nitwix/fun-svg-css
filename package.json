@@ -1,0 +1,22 @@
+{
+  "name": "fun-svg-css",
+  "version": "1.0.0",
+  "description": "Fun drawings/animations with css and svg",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nitwix/fun-svg-css.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nitwix/fun-svg-css/issues"
+  },
+  "homepage": "https://github.com/Nitwix/fun-svg-css#readme",
+  "dependencies": {
+    "svg.js": "^2.6.4"
+  }
+}

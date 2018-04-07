@@ -15,14 +15,6 @@
             filter: url(#shadow);
         }
 
-        #shadow feGaussianBlur{
-            animation-name: glow;
-            animation-duration: 1s;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
-            animation-timing-function: ease-in-out;
-        }
-
         @keyframes glow {
             from{
                 stdDeviation: 10;
@@ -62,7 +54,7 @@
 </head>
 
 <body>
-    <svg height="1000" width="800" id="portals-svg">
+    <!-- <svg height="1000" width="800" id="portals-svg">
         <defs>
             <radialGradient id="orangeGrad" class="gradient">
                 <stop offset="85%" stop-color="white"/>
@@ -75,14 +67,34 @@
 
             <filter id="shadow" x="-20%" y="-20%" width="200%" height="200%" y="-40%">
                 <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
-                <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10">
+                    <animate attributeType="XML" attributeName="stdDeviation" from="10" to="20" dur="1s" repeatCount="indefinite" />
+                </feGaussianBlur>
                 <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
             </filter>
         </defs>
 
         <ellipse cx="200" cy="250" rx="112" ry="200" id="orange" class="portal" />
         <ellipse cx="500" cy="250" rx="112" ry="200" id="blue" class="portal" />
-    </svg>
+    </svg> -->
+
+    <div id="drawing"></div>
 </body>
+
+<script src='node_modules/svg.js/dist/svg.min.js'></script>
+
+<script>
+
+    let draw = SVG('drawing').size(1000, 800);
+    
+    class Portal{
+        constructor(){
+            this.ellipse = draw.ellipse().radius(112, 200).fill('orange').move(112, 200);
+            
+        }
+    }
+
+    let orangePortal = new Portal();
+</script>
 
 </html>
