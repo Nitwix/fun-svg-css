@@ -13,7 +13,9 @@
 
         .portal {
             filter: url(#shadow);
+        }
 
+        #shadow feGaussianBlur{
             animation-name: glow;
             animation-duration: 1s;
             animation-iteration-count: infinite;
@@ -22,6 +24,23 @@
         }
 
         @keyframes glow {
+            from{
+                stdDeviation: 10;
+            }
+            to{
+                stdDeviation: 20;
+            }
+        }
+
+        .portal:hover{
+            animation-name: bounce;
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes bounce {
             from{
                 rx: 112px;
                 ry: 200px;
@@ -54,7 +73,7 @@
                 <stop offset="100%" stop-color="#00BFFF" />
             </radialGradient>
 
-            <filter id="shadow" x="-10%" y="-10%" width="120%" height="200%" y="-40%">
+            <filter id="shadow" x="-20%" y="-20%" width="200%" height="200%" y="-40%">
                 <feOffset result="offOut" in="SourceGraphic" dx="0" dy="0" />
                 <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
                 <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
